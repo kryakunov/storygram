@@ -126,8 +126,6 @@ $themeLabel = is_dark() ? $t['theme']['light'] : $t['theme']['dark'];
             <nav class="nav">
                 <a href="<?= e(url('/search')) ?>"><?= e($t['nav']['search']) ?></a>
                 <a href="<?= e(url('/recent')) ?>"><?= e($t['nav']['recent']) ?></a>
-                <a href="<?= e(url('/admin')) ?>"><?= e($t['nav']['admin']) ?></a>
-                <a href="<?= e(url('/pricing')) ?>"><?= e($t['nav']['pricing']) ?></a>
                 <a class="chip<?= $locale === 'ru' ? ' is-active' : '' ?>" href="<?= e(url('/set-locale?lang=ru&back=' . $backEnc)) ?>">RU</a>
                 <a class="chip<?= $locale === 'en' ? ' is-active' : '' ?>" href="<?= e(url('/set-locale?lang=en&back=' . $backEnc)) ?>">EN</a>
                 <a class="icon-btn" href="<?= e(url('/set-theme?theme=' . $nextTheme . '&back=' . $backEnc)) ?>" aria-label="<?= e($themeLabel) ?>">☀</a>
@@ -142,7 +140,6 @@ $themeLabel = is_dark() ? $t['theme']['light'] : $t['theme']['dark'];
             <nav class="footer-nav">
                 <a href="<?= e(url('/')) ?>"><?= e($t['footer']['watchAnon']) ?></a>
                 <a href="<?= e(url('/search')) ?>"><?= e($t['footer']['onlineFree']) ?></a>
-                <a href="<?= e(url('/pricing')) ?>"><?= e($t['nav']['pricing']) ?></a>
             </nav>
             <div class="footer-copy">
                 <p><?= e($t['footer']['publicOnly']) ?></p>
