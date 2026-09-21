@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SearchStatus {
+  success
+  no_stories
+  not_found
+  private_profile
+  provider_unavailable
+  invalid_username
+  rate_limited
+}
+
+enum MediaType {
+  image
+  video
+}
+
+model SearchQuery {
+  id              String       @id @default(cuid())
+  username        String
+  status          SearchStatus
+  searchedAt      DateTime     @default(now())
+  requesterIpHash String?
+  providerName    String
+  errorMessage    String?
+
+  @@index([searchedAt])
+  @@index([username])
+}
+
+model ProfileCache {
+  id           String       @id @default(cuid())
+  username     String
+  displayName  String
+  avatarUrl    String?
+  bio          String?
+  isPublic     Boolean
+  providerName String
+  fetchedAt    DateTime
+  expiresAt    DateTime
+  stories      StoryCache[]
+
+  @@unique([username, providerName])
+  @@index([expiresAt])
+}
+
+model StoryCache {
+  id              String       @id @default(cuid())
+  profileId       String
+  profile         ProfileCache @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  username        String
+  providerName    String
+  providerStoryId String
+  mediaType       MediaType
+  mediaUrl        String
+  thumbnailUrl    String?
+  caption         String?
+  createdAtRemote DateTime
+  expiresAtRemote DateTime
+  fetchedAt       DateTime
+  expiresAt       DateTime
+
+  @@unique([providerName, providerStoryId])
+  @@index([username])
+  @@index([expiresAt])
+}
+
+model FetchLog {
+  id           String       @id @default(cuid())
+  username     String
+  providerName String
+  resultStatus SearchStatus
+  durationMs   Int
+  createdAt    DateTime     @default(now())
+  errorDetails String?
+
+  @@index([createdAt])
+  @@index([username])
+}
+
+model AppSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model ProviderState {
+  id            String   @id @default(cuid())
+  providerName  String   @unique
+  isHealthy     Boolean
+  lastCheckedAt DateTime
+  message       String?
+}
+
+model SavedSearch {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  createdAt DateTime @default(now())
+}

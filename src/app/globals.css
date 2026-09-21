@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --background: 36 33% 97%;
+  --foreground: 222 28% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 28% 10%;
+  --muted: 30 20% 93%;
+  --muted-foreground: 222 10% 40%;
+  --border: 30 16% 86%;
+  --input: 30 16% 86%;
+  --primary: 18 82% 54%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 200 80% 36%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --ring: 18 82% 54%;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: 230 28% 7%;
+  --foreground: 40 20% 96%;
+  --card: 230 24% 10%;
+  --card-foreground: 40 20% 96%;
+  --muted: 230 16% 16%;
+  --muted-foreground: 230 10% 70%;
+  --border: 230 16% 18%;
+  --input: 230 16% 18%;
+  --primary: 18 90% 62%;
+  --primary-foreground: 230 28% 8%;
+  --accent: 186 72% 48%;
+  --accent-foreground: 230 28% 8%;
+  --destructive: 0 72% 58%;
+  --ring: 18 90% 62%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-ring: hsl(var(--ring));
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.story-ring {
+  background: conic-gradient(
+    from 180deg,
+    hsl(18 90% 58%),
+    hsl(330 80% 60%),
+    hsl(186 72% 48%),
+    hsl(18 90% 58%)
+  );
+}
